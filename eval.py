@@ -112,7 +112,7 @@ def parse_args(argv=None):
                         benchmark=False, no_sort=False, no_hash=False, mask_proto_debug=False, crop=True, detect=False)
 
     global args
-    args = parser.parse_args(argv)
+    args = parser.parse_args('')
 
     if args.output_web_json:
         args.output_coco_json = True
