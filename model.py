@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from data import COCODetection, get_label_map, MEANS, COLORS
+from data import COLORS
 from yolact import Yolact
 from utils.augmentations import BaseTransform, FastBaseTransform, Resize
 from utils.functions import MovingAverage, ProgressBar
@@ -28,7 +28,6 @@ from layers.box_utils import jaccard, center_size
 from utils import timer
 from utils.functions import SavePath
 from layers.output_utils import postprocess
-import pycocotools
 
 from data import cfg, set_cfg, set_dataset
 
@@ -39,7 +38,7 @@ from torch.autograd import Variable
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import cv2
-from subprocess import call
+from subprocess import call 
 import os
 
 class YOLACT_MODEL():
