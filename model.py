@@ -39,10 +39,15 @@ from torch.autograd import Variable
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import cv2
+from subprocess import call
+import os
 
 class YOLACT_MODEL():
 
     def __init__(self, options):
+        if not os.path.isfile('weights/yolact_resnet50_54_800000.pth'):    
+            script = "cat weights/a* > weights/yolact_resnet50_54_800000.pth"
+            call(script, shell=True)
         set_cfg('yolact_resnet50_config')
         cudnn.benchmark = True
         cudnn.fastest = True

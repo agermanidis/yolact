@@ -1,2 +1,3 @@
 runway-python==0.0.57
 Pillow==6.0.0
+pip install --upgrade torch torchvision
