@@ -36,7 +36,6 @@ import torch
 import torch.backends.cudnn as cudnn
 from torch.autograd import Variable
 from collections import defaultdict
-import matplotlib.pyplot as plt
 import cv2
 from subprocess import call 
 import os
