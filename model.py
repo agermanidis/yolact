@@ -28,6 +28,8 @@ from layers.box_utils import jaccard, center_size
 from utils import timer
 from utils.functions import SavePath
 from layers.output_utils import postprocess
+import pycocotools
+
 from data import cfg, set_cfg, set_dataset
 
 import numpy as np
