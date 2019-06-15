@@ -63,6 +63,7 @@ class YOLACT_MODEL():
         cfg.mask_proto_debug = False
         self.color_cache = defaultdict(lambda: {})
         self.threshold = opts['threshold']
+        
     # Generate an image based on some text.
     def detect(self, img):
         numpy_image = np.array(img)
