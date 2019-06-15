@@ -42,34 +42,37 @@ import os
 
 class YOLACT_MODEL():
 
-    def __init__(self, options):
+    def __init__(self, opts):
+        #concat the two files to one file 
         if not os.path.isfile('weights/yolact_resnet50_54_800000.pth'):    
             script = "cat weights/a* > weights/yolact_resnet50_54_800000.pth"
             call(script, shell=True)
+
         set_cfg('yolact_resnet50_config')
         cudnn.benchmark = True
         cudnn.fastest = True
         torch.set_default_tensor_type('torch.cuda.FloatTensor')
         self.net = Yolact()
-        print("loading weights")
         self.net.load_weights('weights/yolact_resnet50_54_800000.pth')
+        print("done.")
+
         self.net.eval()                        
         self.net = self.net.cuda()
 
         self.net.detect.use_fast_nms = True
         cfg.mask_proto_debug = False
         self.color_cache = defaultdict(lambda: {})
-        print("model loaded ...")
-
+        self.threshold = opts['threshold']
     # Generate an image based on some text.
     def detect(self, img):
         numpy_image = np.array(img)
+        print('starting inference...')
         frame = torch.from_numpy(numpy_image).cuda().float()
         batch = FastBaseTransform()(frame.unsqueeze(0))
         preds = self.net(batch)
-        print("finished predictions")
-        output_image = self.display(preds, frame, None, None, undo_transform=False)
-        #cv2.imwrite('output.png', output_image[:, :, (2, 1, 0)] )
+        print("done.")
+        output_image = self.display(preds, frame, None, None,
+                                     undo_transform=False, score_threshold=self.threshold)
         return output_image
 
     def display(self, dets_out, img, h, w, undo_transform=True, class_color=False, mask_alpha=0.45, top_k = 100, score_threshold = 0.3):

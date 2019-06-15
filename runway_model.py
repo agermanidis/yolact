@@ -47,7 +47,7 @@ from PIL import Image
 # supported configs. The setup function should return the model ready to be
 # used.
 setup_options = {
-    'threshold': number(min=0, max=1, step=0.1, default=10),
+    'threshold': number(min=0, max=1, step=0.1, default=0.3),
 }
 @runway.setup(options=setup_options)
 def setup(opts):
