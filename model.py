@@ -44,16 +44,16 @@ class YOLACT_MODEL():
 
     def __init__(self, opts):
         #concat the two files to one file 
-        if not os.path.isfile('weights/yolact_resnet50_54_800000.pth'):    
-            script = "cat weights/a* > weights/yolact_resnet50_54_800000.pth"
-            call(script, shell=True)
+        # if not os.path.isfile('weights/yolact_resnet50_54_800000.pth'):    
+        #     script = "cat weights/a* > weights/yolact_resnet50_54_800000.pth"
+        #     call(script, shell=True)
 
         set_cfg('yolact_resnet50_config')
         cudnn.benchmark = True
         cudnn.fastest = True
         torch.set_default_tensor_type('torch.cuda.FloatTensor')
         self.net = Yolact()
-        self.net.load_weights('weights/yolact_resnet50_54_800000.pth')
+        self.net.load_weights(opts['checkpoint'])
         print("done.")
 
         self.net.eval()                        
