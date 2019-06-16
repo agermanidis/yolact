@@ -1,4 +1,4 @@
-runway-python==0.0.57
+runway-python
 Pillow==6.0.0
 torch==1.1.0
 torchvision
